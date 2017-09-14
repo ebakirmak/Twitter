@@ -1,0 +1,38 @@
+﻿@model MVCTwitter.ServiceUser.GetUsers_Result
+
+@{
+    ViewBag.Title = "UsersDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kullanıcı Bilgileri</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Takip Et", "Follow","UserToUsers", new { FollowingID = Model.ID },null) |
+    @Html.ActionLink("Listeye Geri Dön", "Users")
+</p>

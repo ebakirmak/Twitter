@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TwitterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TwitterEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MyFavorites" EntityType="TwitterModel.MyFavorites" />
+    <EntitySet Name="Tweets" EntityType="TwitterModel.Tweets" />
+    <EntitySet Name="Users" EntityType="TwitterModel.Users" />
+    <EntitySet Name="UserToUsers" EntityType="TwitterModel.UserToUsers" />
+    <AssociationSet Name="FK_MyFavorites_Membership" Association="TwitterModel.FK_MyFavorites_Membership">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MyFavorites" EntitySet="MyFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MyFavorites_Twit" Association="TwitterModel.FK_MyFavorites_Twit">
+      <End Role="Tweets" EntitySet="Tweets" />
+      <End Role="MyFavorites" EntitySet="MyFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Twit_Membership" Association="TwitterModel.FK_Twit_Membership">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tweets" EntitySet="Tweets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembershipToMembership_Membership" Association="TwitterModel.FK_MembershipToMembership_Membership">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserToUsers" EntitySet="UserToUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MembershipToMembership_Membership1" Association="TwitterModel.FK_MembershipToMembership_Membership1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserToUsers" EntitySet="UserToUsers" />
+    </AssociationSet>
+    <FunctionImport Name="GetTweets" ReturnType="Collection(TwitterModel.GetTweets_Result1)">
+      <Parameter Name="FollowingUser" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUsers" ReturnType="Collection(TwitterModel.GetUsers_Result)" />
+  </EntityContainer>
+  <EntityType Name="MyFavorites">
+    <Key>
+      <PropertyRef Name="MyFavoritesID" />
+    </Key>
+    <Property Name="MyFavoritesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="TweetID" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="TwitterModel.FK_MyFavorites_Membership" FromRole="MyFavorites" ToRole="Users" />
+    <NavigationProperty Name="Tweets" Relationship="TwitterModel.FK_MyFavorites_Twit" FromRole="MyFavorites" ToRole="Tweets" />
+  </EntityType>
+  <EntityType Name="Tweets">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Tweet" Type="String" Nullable="false" MaxLength="140" FixedLength="false" Unicode="true" />
+    <Property Name="FavoritesCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MyFavorites" Relationship="TwitterModel.FK_MyFavorites_Twit" FromRole="Tweets" ToRole="MyFavorites" />
+    <NavigationProperty Name="Users" Relationship="TwitterModel.FK_Twit_Membership" FromRole="Tweets" ToRole="Users" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MyFavorites" Relationship="TwitterModel.FK_MyFavorites_Membership" FromRole="Users" ToRole="MyFavorites" />
+    <NavigationProperty Name="Tweets" Relationship="TwitterModel.FK_Twit_Membership" FromRole="Users" ToRole="Tweets" />
+    <NavigationProperty Name="UserToUsers" Relationship="TwitterModel.FK_MembershipToMembership_Membership" FromRole="Users" ToRole="UserToUsers" />
+    <NavigationProperty Name="UserToUsers1" Relationship="TwitterModel.FK_MembershipToMembership_Membership1" FromRole="Users" ToRole="UserToUsers" />
+  </EntityType>
+  <EntityType Name="UserToUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="FollowingUser" Type="Int32" Nullable="false" />
+    <Property Name="FollowerUser" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Users" Relationship="TwitterModel.FK_MembershipToMembership_Membership" FromRole="UserToUsers" ToRole="Users" />
+    <NavigationProperty Name="Users1" Relationship="TwitterModel.FK_MembershipToMembership_Membership1" FromRole="UserToUsers" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_MyFavorites_Membership">
+    <End Type="TwitterModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="TwitterModel.MyFavorites" Role="MyFavorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MyFavorites">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MyFavorites_Twit">
+    <End Type="TwitterModel.Tweets" Role="Tweets" Multiplicity="0..1" />
+    <End Type="TwitterModel.MyFavorites" Role="MyFavorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tweets">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MyFavorites">
+        <PropertyRef Name="TweetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Twit_Membership">
+    <End Type="TwitterModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="TwitterModel.Tweets" Role="Tweets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Tweets">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembershipToMembership_Membership">
+    <End Type="TwitterModel.Users" Role="Users" Multiplicity="1" />
+    <End Type="TwitterModel.UserToUsers" Role="UserToUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserToUsers">
+        <PropertyRef Name="FollowingUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MembershipToMembership_Membership1">
+    <End Type="TwitterModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="TwitterModel.UserToUsers" Role="UserToUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserToUsers">
+        <PropertyRef Name="FollowerUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetTweets_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Tweet" Nullable="false" MaxLength="140" />
+  </ComplexType>
+  <ComplexType Name="GetTweets_Result1">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Tweet" Nullable="false" MaxLength="140" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="FavoritesCount" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetUsers_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

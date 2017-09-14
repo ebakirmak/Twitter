@@ -1,0 +1,7 @@
+ <!--LOCAL DATABASE--> 
+    <!--
+    <add name="TwitterEntities" connectionString="metadata=res://*/TwitterModel.csdl|res://*/TwitterModel.ssdl|res://*/TwitterModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=AKIRMAK;initial catalog=Twitter;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    -->
+    <!--HOST DATABASE-->
+    <add name="TwitterEntities" connectionString="metadata=res://*/TwitterModel.csdl|res://*/TwitterModel.ssdl|res://*/TwitterModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=sql5032.mywindowshosting.com;initial catalog=DB_A1435D_Twitter;persist security info=True;user id=DB_A1435D_Twitter_admin;password=12991453Emre.;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  

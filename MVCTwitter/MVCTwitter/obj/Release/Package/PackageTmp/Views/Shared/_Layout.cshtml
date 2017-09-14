@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Twitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #44CCF6;
+            color: white;
+            padding: 15px;
+        }
+    </style>
+    <script src="~/Scripts/JSUser.js"></script>
+    <script src="~/Scripts/JSTweet.js"></script>
+</head>
+<body>
+   
+       @if (Session["usernameOrPhoneOrMail"] == null)
+       {
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Twitter</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right">
+                            <button class="btn btn-primary" type="button" onclick="$('#loginModal').modal('toggle'); $('#loginModal a:first').tab('show'); ">Giriş</button>
+                        </form>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right">
+                            <button class="btn btn-primary" type="button" onclick="$('#loginModal').modal('toggle'); $('#loginModal a:last').tab('show'); ">Kayıt Ol</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+       }
+       else
+       {
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Twitter</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home", "Index")</li>
+                        <li>@Html.ActionLink("Mesajlar", "")</li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right">
+                            @*<button class="btn btn-primary" id="btnSettings"type="button">Settings  <span class="glyphicon glyphicon-pencil"></span></button>*@
+                            <button id="btnExit" class="btn btn-primary " type="button">Çıkış </button>
+                        </form>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right">
+                            <button class="btn btn-primary" type="button" onclick="$('#tweetModal').modal('toggle');">Tweet  <span class="glyphicon glyphicon-leaf"></span></button>
+                        </form>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right">
+                            @*<button class="btn btn-primary" id="btnSettings"type="button">Settings  <span class="glyphicon glyphicon-pencil"></span></button>*@
+                            @Html.ActionLink("Ayarlar", "Settings")
+                        </form>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group input-group">                              
+                                <span class="input-group-btn">
+                                    @Html.ActionLink("ArkadaşBul", "Users",null, new { @class = "btn btn-primary glyphicon glyphicon-search" })
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                            </div>
+                        </form>
+                    </ul>
+                  
+
+                </div>
+            </div>
+        </nav>
+       }
+    
+ 
+    
+
+
+
+    <div class="container text-center">
+        <div class="row">
+
+
+            <!--ORTA KISIM-->
+            <div class="col-sm-10 col-lg-10 col-md-10" >
+                 @RenderBody();
+            </div>
+            <!---->
+
+            <!--TAKİP EDİLENLER-->
+            <div class="col-sm-2 col-md-2 col-lg-2 well">
+              
+                <div class="alert alert-success fade in">
+                    <div class="row">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3">
+                            <img src="~/Img/friends.png" class="img-circle" height="40" width="40" alt="Avatar">
+                        </div>
+                        <div class="col-sm-9 col-xs-9 col-md-9 col-lg-9">
+                            <strong>Arkadaş İsmi</strong>
+                        </div>
+                    </div>
+                    
+                
+                  
+                </div>
+            </div>
+            <!---->
+        </div>
+    </div>
+
+
+    <footer class="container-fluid text-center">
+    
+    </footer>
+
+</body>
+
+</html>

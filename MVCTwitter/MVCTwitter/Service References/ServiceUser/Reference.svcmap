@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="990ea3c4-2f68-40a6-af32-5e89169963de" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UserOperations.xsd" MetadataType="Schema" ID="300235b7-ed29-4997-b83c-86462064a427" SourceId="1" SourceUrl="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserOperations.disco" MetadataType="Disco" ID="0bf620eb-3000-4167-8019-a5a19c8c6a08" SourceId="1" SourceUrl="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc?disco" />
+    <MetadataFile FileName="UserOperations1.xsd" MetadataType="Schema" ID="95fffd28-2e6e-46c4-ba0e-a4d9c4dea28b" SourceId="1" SourceUrl="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc?xsd=xsd2" />
+    <MetadataFile FileName="UserOperations2.xsd" MetadataType="Schema" ID="75f7b782-116a-4a40-a758-2efffb30ef07" SourceId="1" SourceUrl="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserOperations.wsdl" MetadataType="Wsdl" ID="33d0cbd5-2ca8-49e0-b40a-71e2e8ab09a7" SourceId="1" SourceUrl="http://ebakirmak-001-site1.btempurl.com/UserOperations.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

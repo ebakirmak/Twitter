@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3> @ViewBag.EMail</h3>
+<!---->
+<div class="container">
+    <div class="row">
+        <!--SOL KISIM-->
+        <div class="col-sm-3 col-md-3 col-lg-3 well">
+            <div class="well">
+                <p id="MyProfileName"><a href="#"></a></p>
+                <img src="~/Img/person.jpg" class="img-circle" height="165" width="165" alt="Avatar">
+            </div>
+
+            <h3>@Html.ActionLink("Profilim", "Index")</h3>
+            <h3> @ViewBag.EMail</h3>
+
+            <div class="row">
+                <div class="alert alert-success col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p><strong>Tweets</strong></p>
+                    <p>6</p>
+                </div>
+                <div class="alert alert-success col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p><strong>Takipçiler</strong></p>
+                    <p>100</p>
+                </div>
+            </div>
+        </div>
+      
+        <!--ORTA KISIM-->
+        <div id="divTweetView" class="col-sm-9 col-md-9 col-lg-9">
+
+         
+        </div>
+    </div>
+</div>
+<!--Tweet Modal Tweet gönderme ekranı-->
+<div class="modal fade" id="tweetModal" tabindex="-1" role="dialog" aria-labelledby="tweetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="loginModalLabel">Tweet Gönder</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tweet">                   
+                    <div id="myTweet" class="tab-content">
+                        <div class="tab-pane active" id="deneme">
+                            <form class="form-horizontal">
+                                <fieldset>
+                                    <br/>
+                                    <!-- Text input-->
+                                    <div class="form-group">                                        
+                                        <div class="col-md-12">
+                                            <textarea id="txtTweet"  type="" placeholder="Ne düşünüyorsun?" class="form-control input-md" rows="4"  required></textarea>
+                                            <input type="hidden" id="hiddenID"  value=""/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="col-md-8"></div>
+                                        <div class="col-md-3">
+                                            <button id="btnTweetSend" type="button" class="btn btn-primary btn-lg btn-block">Tweet  <span class="glyphicon glyphicon-leaf"></span></button>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </fieldset>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+     </div>
+</div>
+
+<!-- Login Modal Giriş ve Kayıt Olma ekranı -->
+ <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Kapat"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModalLabel">Üyelik İşlemleri</h4>
+                </div>
+                <div class="modal-body">
+                    <!-------->
+                    <div id="content">
+                        <ul id="tabs" class="nav nav-tabs " data-tabs="tabs">
+                            <li class="active"><a href="#tabLogin" data-toggle="tab">Giriş</a></li>
+                            <li><a href="#tabReg" data-toggle="tab">Kaydol</a></li>
+                        </ul>
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active " id="tabLogin">
+                                <form class="form-horizontal" data-toggle="validator" role="form" method="post" >
+                                    <fieldset>
+                                        <br />
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="txtLoginMail">Mail</label>
+                                            <div class="col-md-5">
+                                                <input id="txtLoginMail" name="txtLoginMail" type="email" placeholder="Mail Adresi" class="form-control input-md" required>
+                                            </div>
+                                        </div>
+                                        <!-- Password input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="txtLoginPass">Şifre</label>
+                                            <div class="col-md-5">
+                                                <input id="txtLoginPass" name="txtLoginPass" type="password" placeholder="Şifreniz" class="form-control input-md" required>
+                                            </div>
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="btnLogin"></label>
+                                            <div class="col-md-4">
+                                                <input type="button" id="btnLogin" name="btnLogin" class="btn btn-primary" value="Giriş" />
+                                            </div>
+                                        </div>
+                                        <!--Helper Classes-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="btnLogin"></label>
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert" id="alertMessage" hidden></div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="tabReg">
+                                <form class="form-horizontal" data-toggle="validator" role="form" method="post">
+                                    <fieldset>                                      
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="txtRegName">Tam Adınız</label>
+                                            <div class="col-md-5">
+                                                <input id="txtRegName" type="text" placeholder="Tam Adınızı Giriniz" class="form-control " required />
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="txtRegMail">Mail</label>
+                                            <div class="col-md-5">
+                                                <input id="txtRegMail" type="email" placeholder="Mail Adresinizi Giriniz" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <!-- Password input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="txtRegPass">Şifre</label>
+                                            <div class="col-md-5">
+                                                <input id="txtRegPass" type="password" placeholder="Şifrenizi Giriniz" class="form-control " required />
+                                            </div>
+                                        </div>
+                                        <!-- Button -->
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="btnReg"></label>
+                                            <div class="col-md-4">
+                                                @*<input type="button" id="btnSignUp" name="btnReg" class="btn btn-primary" value="Kaydol" />*@
+                                                <input type="submit" id="btnSignUp" name="btnReg" class="btn btn-primary" value="KAYDOL">
+                                            </div>
+                                        </div>
+
+                                        <!--Helper Classes-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="btnLogin"></label>
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert" id="alertMessageSign" hidden></div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                </div>
+            </div>
+        </div>
+    </div>
